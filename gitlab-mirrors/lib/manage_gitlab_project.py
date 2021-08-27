@@ -23,7 +23,7 @@ try:
   gitlab_user=os.environ['gitlab_user']
   ssl_verify=os.environ['ssl_verify']
   gitlab_api_version=os.environ['gitlab_api_version']
-  gitlab_delete_pushrules=os.environ['gitlab_delete_pushrules']
+  pushrules_prevent_secrets=os.environ['pushrules_prevent_secrets']
 except KeyError:
   printErr("Environment config missing.  Do not run this script standalone.")
   exit(1)
@@ -61,11 +61,12 @@ def find_project(**kwargs):
   projects = git.projects.list(as_list=True)
   return _find_matches(projects, kwargs, False)
 
-def delete_push_rules(project):
-  if project and gitlab_delete_pushrules == True:
+def update_push_rules(project):
+  if project:
     pr = project.pushrules.get()
     if pr:
-      pr.delete()
+      pr.prevent_secrets=pushrules_prevent_secrets
+      pr.save()
 
 def _find_matches(objects, kwargs, find_all):
   """Helper function for _add_find_fn. Find objects whose properties
@@ -129,7 +130,7 @@ def createproject(pname):
   found_project = find_project(name=pname)
 
   # delete push rules. 
-  delete_push_rules(found_project)  
+  update_push_rules(found_project)  
 
   if needs_transfer(gitlab_user, gitlab_namespace, found_project):
      found_project = transfer_project(found_project, found_group)

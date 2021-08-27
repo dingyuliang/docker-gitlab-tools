@@ -61,4 +61,4 @@ wiki_enabled=false
 snippets_enabled=false
 merge_requests_enabled=false
 public=false
-gitlab_delete_pushrules=true
+pushrules_prevent_secrets=false

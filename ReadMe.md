@@ -58,7 +58,7 @@ docker run --rm -it \
 6. More examples for add/update/ls/...   
 7. Allow multi-level groups (currently, only work for one level group name)  
 8. Group name upcase, lowercase issue.   
-9. Move gitlab_delete_pushrules to per project setting.     
+9. Move pushrules_prevent_secrets to per project setting.     
 10. Implement import  (add -> update;  or import -> add -> update;)
 
 ## Test
@@ -67,4 +67,9 @@ docker run --rm -it \
 3. List ?   
 4. Delete ?   
 
+
+## Resources
+1. https://python-gitlab.readthedocs.io/en/stable/gl_objects/groups.html#reference  
+2. https://github.com/nmklotas/GitLabApiClient   
+  
 

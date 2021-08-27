@@ -16,7 +16,7 @@ source ${git_mirrors_dir}/includes.sh
 [ -z $gitlab_api_version ] && gitlab_api_version=4
 
 #export env vars for python script
-export gitlab_user_token_secret gitlab_url gitlab_namespace gitlab_user ssl_verify gitlab_api_version gitlab_delete_pushrules
+export gitlab_user_token_secret gitlab_url gitlab_namespace gitlab_user ssl_verify gitlab_api_version pushrules_prevent_secrets
 
 PROGNAME="${0##*/}"
 PROGVERSION="${VERSION}"
