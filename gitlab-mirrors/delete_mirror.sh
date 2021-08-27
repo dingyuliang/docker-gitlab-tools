@@ -156,7 +156,7 @@ green_echo -n "DELETED" 1>&2
 echo " ${repo_dir}/${gitlab_namespace}/${project_name}" 1>&2
 if ! ${no_remote_set};then
   if ! ${no_delete};then
-    if ! python lib/manage_gitlab_project.py --delete "${project_name}";then
+    if ! python3 lib/manage_gitlab_project.py --delete "${project_name}";then
       red_echo "There was an unknown issue with manage_gitlab_project.py" 1>&2
       exit 1
     fi
