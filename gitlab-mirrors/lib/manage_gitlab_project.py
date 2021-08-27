@@ -23,6 +23,7 @@ try:
   gitlab_user=os.environ['gitlab_user']
   ssl_verify=os.environ['ssl_verify']
   gitlab_api_version=os.environ['gitlab_api_version']
+  gitlab_delete_pushrules=os.environ['gitlab_delete_pushrules']
 except KeyError:
   printErr("Environment config missing.  Do not run this script standalone.")
   exit(1)
@@ -52,13 +53,19 @@ if not eval(ssl_verify.capitalize()):
 else:
   git=gitlab.Gitlab(gitlab_url,token_secret,ssl_verify=True,api_version=gitlab_api_version)
 
-def find_group(**kwargs):
-  groups = git.groups.list(all_available=False)
+def find_group(search, **kwargs):
+  groups = git.groups.list(search=search, all_available=False)
   return _find_matches(groups, kwargs, False)
 
 def find_project(**kwargs):
   projects = git.projects.list(as_list=True)
   return _find_matches(projects, kwargs, False)
+
+def delete_push_rules(project):
+  if project and gitlab_delete_pushrules == True:
+    pr = project.pushrules.get()
+    if pr:
+      pr.delete()
 
 def _find_matches(objects, kwargs, find_all):
   """Helper function for _add_find_fn. Find objects whose properties
@@ -100,6 +107,9 @@ def createproject(pname):
       description="Git mirror of %s." % project_name
   else:
     description=options.desc
+
+  #get namespace_id before create, to avoid creating project without actual group;
+  group_id=find_group(gitlab_namespace, name=gitlab_namespace).id
   project_options={
     'issues_enabled': options.issues,
     'wall_enabled': options.wall,
@@ -107,7 +117,7 @@ def createproject(pname):
     'wiki_enabled': options.wiki,
     'snippets_enabled': options.snippets,
     'visibility': visibility_level,
-    'namespace_id': find_group(name=gitlab_namespace).id,
+    'namespace_id': group_id,
   }
   #make all project options lowercase boolean strings i.e. true instead of True
   for x in project_options.keys():
@@ -117,6 +127,10 @@ def createproject(pname):
   project_options['description'] = description
   git.projects.create(project_options)
   found_project = find_project(name=pname)
+
+  # delete push rules. 
+  delete_push_rules(found_project)  
+
   if needs_transfer(gitlab_user, gitlab_namespace, found_project):
      found_project = transfer_project(found_project, found_group)
   return found_project
@@ -134,7 +148,9 @@ def needs_transfer(user, groupname, project):
     return project.namespace['name'] != namespace
 
 if options.create:
-  found_group = find_group(name=gitlab_namespace)
+  found_group = find_group(gitlab_namespace, name=gitlab_namespace)
+  #get namespace_id before create, to avoid creating project without actual group;
+  group_id = found_group.id
   found_project = None
 
   found_project= find_project(name=project_name)

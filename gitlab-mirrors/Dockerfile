@@ -15,10 +15,11 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update && \
     apt-get install -yqq \
-            python-pip \
+            python3 \
+            python3-pip \
             git
 
-RUN pip install python-gitlab
+RUN pip3 install python-gitlab
 
 RUN adduser --shell /bin/sh --disabled-password --gecos "" gitmirror
 

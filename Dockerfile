@@ -22,7 +22,7 @@ RUN wget https://raw.github.com/felipec/git-remote-hg/master/git-remote-hg -O /u
 	&& chmod 755 /usr/local/bin/git-remote-hg
 
 # python-gitlab
-RUN pip3 install python-gitlab==1.4
+RUN pip3 install python-gitlab
 
 
 WORKDIR /
