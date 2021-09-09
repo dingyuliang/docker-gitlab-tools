@@ -1,0 +1,8 @@
+Things to do before a release.
+1. Update documentation. commit.
+2. Update CHANGELOG file. commit.
+3. Update VERSION file. commit.
+4. Check out master and merge development into master.
+5. Tag current version based on VERSION file.
+6. Push master to origin.
+7. Push tag to origin.
