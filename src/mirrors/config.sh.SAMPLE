@@ -33,7 +33,7 @@ prune_mirrors=false
 # Gitlab settings
 #
 
-#This is the Gitlab group where all project mirrors will be grouped.
+#This is the Gitlab group where all project mirrors will be grouped. Please use group full path.
 gitlab_namespace="Mirrors"
 #This is the base web url of your Gitlab server.
 gitlab_url="https://gitlab.example.com"

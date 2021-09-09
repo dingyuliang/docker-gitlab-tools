@@ -110,7 +110,7 @@ def createproject(pname):
     description=options.desc
 
   #get namespace_id before create, to avoid creating project without actual group;
-  group_id=find_group(gitlab_namespace, name=gitlab_namespace).id
+  group_id=find_group(gitlab_namespace, full_path=gitlab_namespace).id
   project_options={
     'issues_enabled': options.issues,
     'wall_enabled': options.wall,
@@ -144,12 +144,12 @@ def needs_transfer(user, groupname, project):
   else:
     namespace = user
   if type(project.namespace) == gitlab.v4.objects.Group:
-    return project.namespace.name != namespace
+    return project.namespace.full_path != namespace
   else:
-    return project.namespace['name'] != namespace
+    return project.namespace['full_path'] != namespace
 
 if options.create:
-  found_group = find_group(gitlab_namespace, name=gitlab_namespace)
+  found_group = find_group(gitlab_namespace, full_path=gitlab_namespace)
   #get namespace_id before create, to avoid creating project without actual group;
   group_id = found_group.id
   found_project = None
