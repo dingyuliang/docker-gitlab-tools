@@ -1,7 +1,3 @@
-## Open Source reference
-1. docker-gitlab-mirrors is from https://github.com/Klowner/docker-gitlab-mirrors    
-2. docker-mirrors is based from https://github.com/samrocketman/gitlab-mirrors   
-
 ## Build Docker Image
 ```
 cd src/mirrors    
@@ -99,6 +95,10 @@ exit
 9. Move pushrules_prevent_secrets to per project setting.     
 10. Implement import  (add -> update;  or import -> add -> update;)
 
+## Long Term
+1. Implement a webui so that we can work on UI instead of command.   
+2. Implement agent logic to avoid security risk.  
+
 ## Test
 1. Add works    
 2. Update ?   
@@ -109,5 +109,9 @@ exit
 ## Resources
 1. https://python-gitlab.readthedocs.io/en/stable/gl_objects/groups.html#reference  
 2. https://github.com/nmklotas/GitLabApiClient   
-  
+
+## Open Source reference
+Thank Klowner and Samrocketman for their projects.
+1. docker-gitlab-mirrors is from https://github.com/Klowner/docker-gitlab-mirrors    
+2. docker-mirrors is based from https://github.com/samrocketman/gitlab-mirrors   
 
