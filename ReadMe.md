@@ -4,6 +4,7 @@
 
 ## Build Docker Image
 ```
+cd src/mirrors    
 docker build -f Dockerfile -t docker-gitlab-tools-mirrors . 
 ```
 
@@ -22,42 +23,37 @@ Gitlab Solution (you may have some rules block pushing):
    --> Gitlab -> Settings -> Repository -> Push Rules, Disable all commit restriction  (Prevent pushing secret files)
 
 
-## Examples
-1. Add a new repository mirror.    
+## Examples (Github to Gitlab)
+1. Run Docker Container
 ```
-docker run --rm -it \
-  -v /Users/yding/config:/config \
-  -v /Users/yding/mirrors:/data/mirrors \
-  -e GITLAB_MIRROR_GITLAB_USER=yding \
-  -e GITLAB_MIRROR_GITLAB_NAMESPACE=Mirror \
-  -e GITLAB_MIRROR_GITLAB_URL=https://gitlab.example.com \
-  docker-gitlab-tools-mirrors \
-  add --git --project-name test --mirror https://github.com/dingyuliang/test
+   docker run --rm -it \
+  -v /Users/yding/github2gitlab/private_token:/home/gitmirror/private_token \
+  -v /Users/yding/github2gitlab/config.sh:/home/gitmirror/gitlab-mirrors/config.sh:ro \
+  -v /Users/yding/github2gitlab/ssh-key:/home/gitmirror/.ssh \
+  -v /Users/yding/github2gitlab/repositories:/home/gitmirror/repositories \
+  docker-gitlab-tools-mirrors  \
+  /bin/bash 
 ```
-2. Update an existing repository sync  
+2. In docker container, add a new repository mirror.    
+```
+add_mirror.sh --git --group-path rootgroup/testgroup --project-name test_mirrors --mirror https://github.com/dingyuliang/test
+```
+3. In docker container, update an existing repository sync  
 Required project already cloned in disk      
 ```
-docker run --rm -it \
-  -v /Users/yding/config:/config \
-  -v /Users/yding/mirrors:/data/mirrors \
-  -e GITLAB_MIRROR_GITLAB_USER=yding \
-  -e GITLAB_MIRROR_GITLAB_NAMESPACE=Mirror \
-  -e GITLAB_MIRROR_GITLAB_URL=https://gitlab.example.com \
-  docker-gitlab-tools-mirrors \
-  update test
+update_mirror.sh test_mirrors rootgroup/testgroup 
 ``` 
 
 
 ## ToDo
-1. Github credentials & Gitlab passphrase  
-2. Mirror Path seems doesn't work. No code is downloaded into local mirror folder.     
+1. Github credentials & Gitlab passphrase       
 2. Read mirror configuration from SQLite or configuration file.  
 3. Solve Gitlab Repository Push Rule settings.    
 4. Make docker run simple   
 5. Cron Job  
 6. More examples for add/update/ls/...   
-7. Allow multi-level groups (currently, only work for one level group name)  
-8. Group name upcase, lowercase issue.   
+7. ~~Allow multi-level groups (currently, only work for one level group name)~~   
+8. ~~Group name upcase, lowercase issue.~~   
 9. Move pushrules_prevent_secrets to per project setting.     
 10. Implement import  (add -> update;  or import -> add -> update;)
 
