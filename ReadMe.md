@@ -88,9 +88,9 @@ exit
 
 
 ## ToDo
-1. Github credentials & Gitlab passphrase       
+1. ~~Github credentials & Gitlab passphrase~~       
 2. Read mirror configuration from SQLite or configuration file.  
-3. Solve Gitlab Repository Push Rule settings.    
+3. ~~Solve Gitlab Repository Push Rule settings.~~    
 4. Make docker run simple   
 5. Cron Job  
 6. More examples for add/update/ls/...   
