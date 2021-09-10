@@ -3,7 +3,7 @@
 #MIT License
 #Created Tue Sep 10 23:01:08 EDT 2013
 #USAGE
-#  ./update_mirror.sh project_name
+#  ./update_mirror.sh project_name [groupname]
 
 #bash option stop on first error
 set -e
@@ -46,6 +46,9 @@ PROGVERSION="${VERSION}"
 
 #Default script options
 project_name="${1}"
+if [ "$#" -eq 2 ]; then
+  gitlab_namespace="${2}"
+fi
 
 if [ -z "${project_name}" ];then
   echo "Must specify a project_name!" 1>&2

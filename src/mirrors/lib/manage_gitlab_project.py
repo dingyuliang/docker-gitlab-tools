@@ -42,11 +42,15 @@ parser.add_option("--http",dest="http",action="store_true",default=False)
 if len(args) == 0:
   printErr("No project name specified.  Do not run this script standalone.")
   exit(1)
-elif len(args) > 1:
+elif len(args) > 2:
   printErr("Too many arguments.  Do not run this script standalone.")
   exit(1)
 
+# read the 1st arg as project_name
 project_name=args[0]
+# read the 2nd arg as gitlab_namespace
+if len(args) == 2:
+  gitlab_namespace=args[1]
 
 if not eval(ssl_verify.capitalize()):
   git=gitlab.Gitlab(gitlab_url,token_secret,ssl_verify=False,api_version=gitlab_api_version)

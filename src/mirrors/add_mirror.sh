@@ -3,7 +3,7 @@
 #MIT License
 #Created Tue Sep 10 23:01:08 EDT 2013
 #USAGE
-#  ./add_mirror.sh --git --project-name someproject --mirror http://example.com/project.git
+#  ./add_mirror.sh --git --project-name someproject [--group-path somegroup] --mirror http://example.com/project.git
 
 #bash option stop on first error
 set -e
@@ -77,6 +77,9 @@ DESCRIPTION:
   -p,--project-name NAME
                      Set a GitLab project name to NAME.
 
+  -g,--group-path PATH
+                     Set a GitLab group full path to PATH.
+
 REPOSITORY TYPES:
   At least one repository TYPE is required.
 
@@ -92,7 +95,7 @@ EOF
 }
 #Short options are one letter.  If an argument follows a short opt then put a colon (:) after it
 SHORTOPTS="hvflm:n:p:"
-LONGOPTS="help,version,force,git,svn,bzr,hg,mirror:,no-create:,no-remote,project-name:,authors-file:"
+LONGOPTS="help,version,force,git,svn,bzr,hg,mirror:,no-create:,no-remote,project-name:,group-path:,authors-file:"
 ARGS=$(getopt -s bash --options "${SHORTOPTS}" --longoptions "${LONGOPTS}" --name "${PROGNAME}" -- "$@")
 eval set -- "$ARGS"
 while true; do
@@ -128,6 +131,10 @@ while true; do
       ;;
     -p|--project-name)
         project_name="${2}"
+        shift 2
+      ;;
+    -g|--group-path)
+        gitlab_namespace="${2}"
         shift 2
       ;;
     -m|--mirror)
@@ -399,8 +406,8 @@ fi
 #If the project doesn't already exist in gitlab then create it.
 if ! ${no_remote_set} && [ -z "${no_create}" ];then
   green_echo "Resolving gitlab remote." 1>&2
-  if python3 lib/manage_gitlab_project.py --create --desc "Mirror of ${mirror}" ${CREATE_OPTS} "${project_name}" 1> /dev/null;then
-    gitlab_remote=$(python3 lib/manage_gitlab_project.py --create --desc "Mirror of ${mirror}" ${CREATE_OPTS} "${project_name}")
+  if python3 lib/manage_gitlab_project.py --create --desc "Mirror of ${mirror}" ${CREATE_OPTS} "${project_name}" "${gitlab_namespace}" 1> /dev/null;then
+    gitlab_remote=$(python3 lib/manage_gitlab_project.py --create --desc "Mirror of ${mirror}" ${CREATE_OPTS} "${project_name}" "${gitlab_namespace}")
   else
     red_echo "There was an unknown issue with manage_gitlab_project.py" 1>&2
     exit 1

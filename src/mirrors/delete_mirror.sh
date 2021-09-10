@@ -36,7 +36,7 @@ usage()
 ${PROGNAME} ${PROGVERSION} - MIT License by Sam Gleske
 
 USAGE:
-  ${PROGNAME} --delete PROJECT
+  ${PROGNAME} --delete PROJECT 
 
 DESCRIPTION:
   This program deletes a project so that it will no longer be mirrored.
@@ -50,13 +50,15 @@ DESCRIPTION:
                      This option is forced for projects with
                      --no-create set when the mirror was added.
   -q,--quiet         Suppress user confirmation messages.
+  -g,--group-path PATH
+                     Set a GitLab group full path to PATH.
 
 
 EOF
 }
 #Short options are one letter.  If an argument follows a short opt then put a colon (:) after it
 SHORTOPTS="hvd:n:q"
-LONGOPTS="help,version,delete:,no-delete:,quiet"
+LONGOPTS="help,version,delete:,no-delete:,group-path:,quiet"
 ARGS=$(getopt -s bash --options "${SHORTOPTS}" --longoptions "${LONGOPTS}" --name "${PROGNAME}" -- "$@")
 eval set -- "$ARGS"
 while true; do
@@ -71,6 +73,10 @@ while true; do
       ;;
     -d|--delete)
         project_name="${2}"
+        shift 2
+      ;;
+    -g|--group-path)
+        gitlab_namespace="${2}"
         shift 2
       ;;
     -n|--no-delete)

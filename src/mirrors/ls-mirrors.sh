@@ -3,7 +3,7 @@
 #MIT License
 #Created Sat Sep 14 15:50:13 EDT 2013
 #USAGE
-#  ./list-mirrors.sh
+#  ./ls-mirrors.sh [groupname]
 
 #bash option stop on first error
 set -e
@@ -14,6 +14,9 @@ source ${git_mirrors_dir}/includes.sh
 
 PROGNAME="${0##*/}"
 PROGVERSION="${VERSION}"
+if [ "$#" -eq 1 ]; then
+  gitlab_namespace="${1}"
+fi
 
 pushd "${repo_dir}/${gitlab_namespace}" &> /dev/null
 echo -n "Namespace: " 1>&2
