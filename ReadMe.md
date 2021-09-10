@@ -68,7 +68,7 @@ git config credential.helper store
 ```
 git config --global credential.helper store
 ```
-3. Option 2 (use SSH)  (See Resource - Configure Git Credentialss)   
+3. Option 3 (use SSH)  (See Resource - Configure Git Credentialss)   
 
 ## Resource - Store SSH KeyPhrase 
 1. In Docker Container, run below comand, see https://gist.github.com/nepsilon/45fae11f8d173e3370c3:     
@@ -97,7 +97,7 @@ exit
 
 ## Long Term
 1. Implement a webui so that we can work on UI instead of command.   
-2. Implement agent logic to avoid security risk.  
+2. Implement agent logic to reduce security concern/risk.  
 
 ## Test
 1. Add works    
