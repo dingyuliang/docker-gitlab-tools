@@ -36,6 +36,9 @@ WORKDIR /home/gitmirror/gitlab-mirrors
 RUN mkdir /home/gitmirror/repositories && \
     chmod 755 /home/gitmirror/gitlab-mirrors/*.sh
 
+# Configure Git credential
+RUN git config --global credential.helper cache
+
 ENV PATH=$PATH:/home/gitmirror/gitlab-mirrors
 
 ENTRYPOINT [ "/bin/bash", "/home/gitmirror/gitlab-mirrors/scripts/docker/entrypoint.sh" ]
