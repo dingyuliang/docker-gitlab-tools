@@ -1,7 +1,7 @@
 ## Build Docker Image
 ```
 cd src/mirrors    
-docker build -f Dockerfile -t docker-gitlab-tools-mirrors . 
+docker build -f Dockerfile -t docker-gitlab-toomirrors_ls . 
 ```
 
 ## Errors
@@ -27,17 +27,17 @@ Gitlab Solution (you may have some rules block pushing):
   -v /Users/yding/github2gitlab/config.sh:/home/gitmirror/gitlab-mirrors/config.sh:ro \
   -v /Users/yding/github2gitlab/ssh-key:/home/gitmirror/.ssh \
   -v /Users/yding/github2gitlab/repositories:/home/gitmirror/repositories \
-  docker-gitlab-tools-mirrors  \
+  docker-gitlab-toomirrors_ls  \
   /bin/bash 
 ```
 2. In docker container, add a new repository mirror.    
 ```
-add_mirror.sh --git --group-path rootgroup/testgroup --project-name test_mirrors --mirror https://github.com/dingyuliang/test
+mirrors_add.sh --git --group-path rootgroup/testgroup --project-name test_mirrors --mirror https://github.com/dingyuliang/test
 ```
 3. In docker container, update an existing repository sync  
 Required project already cloned in disk      
 ```
-update_mirror.sh test_mirrors rootgroup/testgroup 
+mirrors_update.sh test_mirrors rootgroup/testgroup 
 ``` 
 
 ## Resource - Configure Git Credentialss

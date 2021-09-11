@@ -3,7 +3,7 @@
 #MIT License
 #Created Sat Sep 14 15:50:13 EDT 2013
 #USAGE
-#  ./ls-mirrors.sh [groupname]
+#  ./mirrors_ls.sh [groupname]
 
 #bash option stop on first error
 set -e

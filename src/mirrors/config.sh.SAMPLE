@@ -4,14 +4,14 @@
 # gitlab-mirrors settings
 #
 
-#The user git-mirrors will run as.
+#The user mirrors_git will run as.
 system_user="gitmirror"
 #The home directory path of the $system_user
 user_home="/home/${system_user}"
 #The repository directory where gitlab-mirrors will contain copies of mirrored
 #repositories before pushing them to gitlab.
 repo_dir="${user_home}/repositories"
-#colorize output of add_mirror.sh, update_mirror.sh, and git-mirrors.sh
+#colorize output of mirrors_add.sh, mirrors_update.sh, and mirrors_git.sh
 #commands.
 enable_colors=true
 #These are additional options which should be passed to git-svn.  On the command

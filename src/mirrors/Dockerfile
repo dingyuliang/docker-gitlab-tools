@@ -7,7 +7,7 @@
 #    --volume /path/to/ssh-keys:/home/gitmirror/.ssh \
 #    --volume /path/to/repositories:/home/gitmirror/repositories \
 #    gitlab-mirrors \
-#    <gitlab-mirrors cmd> <cmd options> # eg. add_mirror.sh --help 
+#    <gitlab-mirrors cmd> <cmd options> # eg. mirrors_add.sh --help 
 ###
 FROM debian:10
 

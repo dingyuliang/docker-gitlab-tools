@@ -3,7 +3,7 @@
 #MIT License
 #Created Tue Sep 10 23:01:08 EDT 2013
 #USAGE
-#  ./update_mirror.sh project_name [groupname]
+#  ./mirrors_update.sh project_name [groupname]
 
 #bash option stop on first error
 set -e
@@ -54,9 +54,11 @@ if [ -z "${project_name}" ];then
   echo "Must specify a project_name!" 1>&2
   exit 1
 elif [ ! -d "${repo_dir}/${gitlab_namespace}/${project_name}" ];then
-  echo "No git repository for ${1}!  Perhaps run add_mirror.sh?" 1>&2
+  echo "No git repository for ${1}!  Perhaps run mirrors_add.sh?" 1>&2
   exit 1
 fi
+
+yellow_echo "Updating ${gitlab_namespace}/${project_name} ..."
 
 cd "${repo_dir}/${gitlab_namespace}/${project_name}"
 #check for local only repository type

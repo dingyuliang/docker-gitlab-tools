@@ -14,7 +14,7 @@
 
 ## gitlab-mirrors v0.5.3
 
-* Bugfix `git-mirrors.sh` while loop executing in a subshell and the value of
+* Bugfix `mirrors_git.sh` while loop executing in a subshell and the value of
   `STATUS` being lost.  See [PR #92][#92].
 
 [#92]: https://github.com/samrocketman/gitlab-mirrors/pull/92
@@ -49,7 +49,7 @@
   more than 80 characters.
 * Added `no_remote_set` option to `config.sh`.  This forces to only allow
   mirroring to local disk rather than having an addition git remote.
-* `--no-remote` option added to `add_mirror.sh`.  This allows a local disk only
+* `--no-remote` option added to `mirrors_add.sh`.  This allows a local disk only
   mirror to be added which has no git remote to push.
 * Bugfix `private_token` not always required.  In `config.sh` there were minor
   issues with non-GitLab mirroring and no-remote mirroring when GitLab was not
@@ -75,18 +75,18 @@
 
 ## gitlab-mirrors v0.4.4
 
-* Added Mercurial mirroring support.  `add_mirror.sh` now has the `--hg` option
+* Added Mercurial mirroring support.  `mirrors_add.sh` now has the `--hg` option
   when adding a repository.
 
 ## gitlab-mirrors v0.4.3
 
 * Added `no_create_set` option to `config.sh`.  This option forces the user to
   always provide a remote for pushing repositories via the `--no-create` option
-  in `add_mirror.sh`.
+  in `mirrors_add.sh`.
 
 ## gitlab-mirrors v0.4.2
 
-* Added `--no-create` option to `add_mirror.sh` which gives the script the
+* Added `--no-create` option to `mirrors_add.sh` which gives the script the
   remote to push manually rather than attempting any communication with GitLab.
   This enables gitlab-mirrors to be used with non-gitlab git remotes.  It was
   specifically integrated for the purpose of mirroring gitlab wikis.
@@ -133,7 +133,7 @@
 
 ## gitlab-mirrors v0.2.9
 
-* `git-mirrors.sh` major bugfix where working directory was not properly set
+* `mirrors_git.sh` major bugfix where working directory was not properly set
   before executing mirror updates.  This caused the `cron` job to fail.
 
 ## gitlab-mirrors v0.2.8
@@ -151,7 +151,7 @@
 
 ## gitlab-mirrors v0.2.6
 
-* *New Feature* command `ls-mirrors.sh`!
+* *New Feature* command `mirrors_ls.sh`!
 * Converted `CHANGELOG` to markdown.
 * Fixed bug in preflight check where `merge_requests_enabled` was not being
   checked.
@@ -177,12 +177,12 @@
 
 ## gitlab-mirrors v0.2.3
 
-* Adding a final catch error message to `add_mirror.sh`.
+* Adding a final catch error message to `mirrors_add.sh`.
 * `RELEASE` file for more consistent releases.
 
 ## gitlab-mirrors v0.2.2
 
-* Safer environment variable option checking for `config.sh` in `add_mirror.sh`
+* Safer environment variable option checking for `config.sh` in `mirrors_add.sh`
   command.
 * Added Features to `README`
 
@@ -192,34 +192,34 @@
 
 ## gitlab-mirrors v0.2
 
-* Renamed project from `git-mirrors` to `gitlab-mirrors`.
+* Renamed project from `mirrors_git` to `gitlab-mirrors`.
 * SVN repository mirroring now supported!
 * Project creation defaults can now be set in `config.sh`.
 * New `delete_mirror.sh` command.
 * Colorized output enabled for all commands.
 * Better argument handling on all commands.
-* New options for `add_mirror.sh`, see `./add_mirror.sh -h`.
+* New options for `mirrors_add.sh`, see `./mirrors_add.sh -h`.
 * Knit and grit changes
-  * `add_mirror.sh` has more robust error checking.
-  * `add_mirror.sh` options can be out of order.  Now using `getopt` for better
+  * `mirrors_add.sh` has more robust error checking.
+  * `mirrors_add.sh` options can be out of order.  Now using `getopt` for better
     argument handling.
   * `lib/create_gitlab_project.py` has been renamed to
     `lib/manage_gitlab_project.py`.
   * `manage_gitlab_project.py` has a little better error handling.
     * Added `optparse` for better argument handling.
 
-## git-mirrors v0.1.1
+## mirrors_git v0.1.1
 
 * Minor update to documentation adding project URL to docs.
 
-## git-mirrors v0.1
+## mirrors_git v0.1
 
 * Initial project release.  Project gives admins the ability to have mirrors of
   remote git repositories.
-* Comes with simple `add_mirror.sh`, `update_mirror.sh`, and `git-mirrors.sh`.
+* Comes with simple `mirrors_add.sh`, `mirrors_update.sh`, and `mirrors_git.sh`.
   * Note very little error checking on all commands.
-  * `add_mirror.sh` arguments must be in a specific order.
-* `add_mirror.sh` utilizes `lib/create_gitlab_project.py` to check for a gitlab
+  * `mirrors_add.sh` arguments must be in a specific order.
+* `mirrors_add.sh` utilizes `lib/create_gitlab_project.py` to check for a gitlab
   project.  If it doesn't exist then create it.  When the project exists simply
   return the project remote "git url over ssh".
   * `create_gitlab_project.py` has very little error checking.  Arguments must

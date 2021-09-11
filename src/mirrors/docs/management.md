@@ -16,7 +16,7 @@ initial BZR clone has finished.*
 
 ## Create a mirror
 
-See also `./add_mirror.sh --help`.
+See also `./mirrors_add.sh --help`.
 
 ### Bazaar
 
@@ -27,7 +27,7 @@ Create a BZR repository mirror.
 
     su - gitmirror
     cd gitlab-mirrors
-    ./add_mirror.sh --bzr --project-name bzr-ubuntu-hello --mirror lp:ubuntu/hello
+    ./mirrors_add.sh --bzr --project-name bzr-ubuntu-hello --mirror lp:ubuntu/hello
 
 ### Git
 
@@ -35,12 +35,12 @@ Create a git repository mirror.
 
     su - gitmirror
     cd gitlab-mirrors
-    ./add_mirror.sh --git --project-name github-gitlab-mirrors --mirror https://github.com/samrocketman/gitlab-mirrors.git
+    ./mirrors_add.sh --git --project-name github-gitlab-mirrors --mirror https://github.com/samrocketman/gitlab-mirrors.git
 
 Create a git repository mirror without attempting to auto-create the project and
 just take a remote.
 
-    ./add_mirror.sh --git --project-name github-gitlab-mirrors --mirror https://github.com/samrocketman/gitlab-mirrors.git --no-create user@yourserver.com:projects/gitlab-mirrors.git
+    ./mirrors_add.sh --git --project-name github-gitlab-mirrors --mirror https://github.com/samrocketman/gitlab-mirrors.git --no-create user@yourserver.com:projects/gitlab-mirrors.git
 
 ### Mercurial
 
@@ -51,7 +51,7 @@ Create a hg repository mirror.
 
     su - gitmirror
     cd gitlab-mirrors
-    ./add_mirror.sh --hg --project-name lodgeit-main --mirror https://bitbucket.org/EnTeQuAk/lodgeit-main
+    ./mirrors_add.sh --hg --project-name lodgeit-main --mirror https://bitbucket.org/EnTeQuAk/lodgeit-main
 
 ### Subversion
 
@@ -61,7 +61,7 @@ Create an SVN repository mirror.
 
     su - gitmirror
     cd gitlab-mirrors
-    ./add_mirror.sh --svn --project-name someproject --mirror svn+ssh://user@svn.example.com/srv/repos/someproject --authors-file ./authors.txt
+    ./mirrors_add.sh --svn --project-name someproject --mirror svn+ssh://user@svn.example.com/srv/repos/someproject --authors-file ./authors.txt
 
 The `--authors-file` option is an optional argument.  It serves the same purpose
 as the `git-svn --authors-file` option.  It is an authors file for mapping SVN
@@ -69,7 +69,7 @@ users to git users.  See the [`git-svn(1)`][git-svn-man] man page for more
 details.
 
 Notice in [`config.sh`](../config.sh.SAMPLE) there's an option
-`git_svn_additional_options`.  This option affects `add_mirror.sh` and the
+`git_svn_additional_options`.  This option affects `mirrors_add.sh` and the
 creation of a mirror only.  It doesn't affect the synchronization of the svn
 repository.  See the [`git-svn(1)`][git-svn-man] man page under `init` COMMAND
 options for available values which can be set.
@@ -78,18 +78,18 @@ options for available values which can be set.
 
     su - gitmirror
     cd gitlab-mirrors
-    ./add_mirror --git --project-name someproject --mirror git@server:repo.git --no-remote
+    ./mirrors_add --git --project-name someproject --mirror git@server:repo.git --no-remote
 
 By using the `--no-remote` option repositories on the internet can be mirrored
 locally on disk.  It does not attempt to reach out to gitlab at all.
 
 ## List all known mirrors
 
-See also `./ls-mirrors.sh --help`.
+See also `./mirrors_ls.sh --help`.
 
     su - gitmirror
     cd gitlab-mirrors
-    ./ls-mirrors.sh
+    ./mirrors_ls.sh
 
 ## Delete a mirror
 
@@ -103,17 +103,17 @@ See also `./delete_mirror.sh --help`.
 
     su - gitmirror
     cd gitlab-mirrors
-    ./update_mirror.sh project_name
+    ./mirrors_update.sh project_name
 
 ## Update all known mirrors
 
     su - gitmirror
     cd gitlab-mirrors
-    ./git-mirrors.sh
+    ./mirrors_git.sh
 
 Updating all known mirrors is also meant to be used with a cron job via
 `crontab`.  See `man 5 crontab`.
 
-    @hourly /home/gitmirror/gitlab-mirrors/git-mirrors.sh
+    @hourly /home/gitmirror/gitlab-mirrors/mirrors_git.sh
 
 [git-svn-man]: https://www.kernel.org/pub/software/scm/git/docs/git-svn.html
