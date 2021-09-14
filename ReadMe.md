@@ -95,6 +95,11 @@ exit
 9. Move pushrules_prevent_secrets to per project setting.     
 10. Implement import  (add -> update;  or import -> add -> update;)
 
+
+## Issues
+1. mirrors_update doesn't delete the branches which have been deleted from source.    
+   i.e., after I deleted a branch in github and gitlab, then I perform a update from github to gitlab, the branch will be added and synced to gitlab. 
+
 ## Long Term
 1. Implement a webui so that we can work on UI instead of command.   
 2. Implement agent logic to reduce security concern/risk.  
