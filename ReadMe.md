@@ -1,3 +1,8 @@
+## Docker Hub
+```
+docker push dingyuliang/gitlab-tools-mirrors:latest
+```
+
 ## Build Docker Image
 ```
 cd src/mirrors    
