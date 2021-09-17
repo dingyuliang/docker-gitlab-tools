@@ -6,7 +6,7 @@ docker push dingyuliang/gitlab-tools-mirrors:latest
 ## Build Docker Image
 ```
 cd src/mirrors    
-docker build -f Dockerfile -t docker-gitlab-toomirrors_ls . 
+docker build -f Dockerfile -t gitlab-tools-mirrors . 
 ```
 
 ## Errors
