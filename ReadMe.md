@@ -10,7 +10,7 @@ docker build -f Dockerfile -t gitlab-tools-mirrors .
 ```
 
 ## Errors
-1. Copy both private and public rsa, set permission 400 or 600
+1. Copy both private and public rsa, set permission 400 or 600  (or generate ssh key in docker container)
 ```
 chmod 600 /Users/yding/config/id_rsa
 ```    
@@ -104,6 +104,7 @@ exit
 ## Issues
 1. mirrors_update doesn't delete the branches which have been deleted from source.    
    i.e., after I deleted a branch in github and gitlab, then I perform a update from github to gitlab, the branch will be added and synced to gitlab. 
+2. Doesn't work: sync same repo from github to different groups in gitlab
 
 ## Long Term
 1. Implement a webui so that we can work on UI instead of command.   
