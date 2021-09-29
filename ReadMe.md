@@ -1,6 +1,6 @@
 ## Docker Hub
 ```
-docker push dingyuliang/gitlab-tools-mirrors:latest
+docker pull dingyuliang/gitlab-tools-mirrors:latest
 ```
 
 ## Build Docker Image
@@ -32,7 +32,7 @@ Gitlab Solution (you may have some rules block pushing):
   -v /Users/yding/github2gitlab/config.sh:/home/gitmirror/gitlab-mirrors/config.sh:ro \
   -v /Users/yding/github2gitlab/ssh-key:/home/gitmirror/.ssh \
   -v /Users/yding/github2gitlab/repositories:/home/gitmirror/repositories \
-  docker-gitlab-toomirrors_ls  \
+  gitlab-tools-mirrors  \
   /bin/bash 
 ```
 2. In docker container, add a new repository mirror.    
